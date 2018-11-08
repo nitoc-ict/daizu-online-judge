@@ -1,0 +1,12 @@
+{
+	"name": "daizu-online-judge",
+	"authors": [
+		"nitoc-ict"
+	],
+	"dependencies": {
+		"vibe-d": "~>0.8.2"
+	},
+	"description": "daizu-online-judge",
+	"copyright": "Copyright © 2018, nitoc-ict",
+	"license": "MIT"
+}
