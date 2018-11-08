@@ -1,3 +1,2 @@
 language: d
-install: dub fetch
 script: dub test --compiler=${DC}
