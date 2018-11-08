@@ -8,5 +8,6 @@
 	},
 	"description": "daizu-online-judge",
 	"copyright": "Copyright © 2018, nitoc-ict",
-	"license": "MIT"
+	"license": "MIT",
+  "versions": ["VibeDefaultMain"]
 }
