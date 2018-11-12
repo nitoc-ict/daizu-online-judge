@@ -1,10 +1,9 @@
-from alpine
+FROM alpine
 
 MAINTAINER Taichi Uchihara <hoge.uchihara@gmail.com>
 
 ENV \
   LDC_VERSION=1.12.0 \
-  DUB_VERSION=1.12.0
 
 RUN \
   apk add --no-cache bash llvm5 musl-dev gcc curl libcurl curl-dev tzdata openssl xz git && \
