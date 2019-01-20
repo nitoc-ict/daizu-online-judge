@@ -1,6 +1,6 @@
-before_install:
-  - sudo apt update
-  - sudo apt install -y libevent-dev libssl-dev
-
+sudo: false
 language: d
-script: dub test --compiler=${DC}
+service:
+  - docker
+script:
+  docker build --force-rm=true -t daizu .
