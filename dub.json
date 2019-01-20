@@ -4,10 +4,14 @@
 		"nitoc-ict"
 	],
 	"dependencies": {
-		"vibe-d": "~>0.8.2"
+		"vibe-d": "~>0.8.2",
+		"vibe-d:tls": "~>0.8.2"
+	},
+	"subConfiguration": {
+		"vibe-d:tls": "openssl-1.1"
 	},
 	"description": "daizu-online-judge",
 	"copyright": "Copyright © 2018, nitoc-ict",
 	"license": "MIT",
-  "versions": ["VibeDefaultMain"]
+	"versions": ["VibeDefaultMain", "VibeUseOpenSSL11"]
 }

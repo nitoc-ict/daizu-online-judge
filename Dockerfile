@@ -1,30 +1,25 @@
-FROM alpine
+FROM base/archlinux:2018.10.01
 
 MAINTAINER Taichi Uchihara <hoge.uchihara@gmail.com>
 
-ENV \
-  LDC_VERSION=1.12.0 \
-
-RUN \
-  apk add --no-cache bash llvm5 musl-dev gcc curl libcurl curl-dev tzdata openssl xz git && \
-  cd / && curl -fsS -L -o "/ldc.tar.xz" "https://github.com/ldc-developers/ldc/releases/download/v${LDC_VERSION}/ldc2-${LDC_VERSION}-alpine-linux-x86_64.tar.xz" && \
-  tar xf /ldc.tar.xz && \
-  mv "/ldc2-${LDC_VERSION}-alpine-linux-x86_64" "/ldc" && \
-  rm -rf /ldc.tar.xz
+ARG LDC_VERSION=1.12.0
 
 ENV \
-  PATH="/ldc/bin:${PATH}" \
-  LD_LIBRARY_PATH="/ldc/lib:/usr/lib:/lib:${LD_LIBRARY_PATH}" \
-  LIBRARY_PATH="/ldc/lib:/usr/lib:/lib:${LD_LIBRARY_PATH}"
+    PATH="/root/ldc/bin:${PATH}" \
+    LD_LIBRARY_PATH="/root/ldc/lib:/usr/lib:/lib:${LD_LIBRARY_PATH}" \
+    LIBRARY_PATH="/root/ldc/lib:/usr/lib:/lib:${LD_LIBRARY_PATH}"
 
 RUN \
- cd /tmp \
- && echo 'void main() {import std.stdio; stdout.writeln("pass test"); }' > test.d \
- && ldc2 test.d \
- && ./test && rm test*
+  pacman -Syy --noconfirm && pacman -Syu --noconfirm && pacman -S --noconfirm ldc dub openssl libevent
+#  wget https://www.archlinux.org/packages/community/x86_64/ldc/download/ && \
+#  pacman -U  --noconfirm ldc-2_1.12.0-1-x86_64.pkg.tar.xz
+#  tar xfv ldc2-1.12.0-linux-aarch64.tar.xz
+#  wget https://github.com/ldc-developers/ldc/releases/download/v1.12.0/ldc2-1.12.0-linux-aarch64.tar.xz && \
 
 COPY \
   ./ /daizu-online-judge/
 
-#EXPOSE 8080
-#ENTRYPOINT [ "sh" ]
+RUN \
+  cd /daizu-online-judge/ && dub test
+
+ENTRYPOINT [ "sh" ]
